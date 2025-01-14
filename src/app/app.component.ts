@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { dataset } from './shared/dataset.model';
+import { RootObject, Dataset } from './shared/dataset.model';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -8,15 +8,16 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  largeDataset: dataset[] = [];
-  filteredDataset: dataset[] = [];
+  largeDataset: Dataset[] = [];
+  filteredDataset: Dataset[] = [];
 
   constructor(private httpClient: HttpClient) {}
   ngOnInit(): void {
     //filtering the dataset and changing the name of 1 product type
-    this.httpClient.get<dataset[]>('assets/dataset.json').subscribe(
+    this.httpClient.get<RootObject>('assets/newDataset.json').subscribe(
       (dataset) => {
-        this.largeDataset = dataset;
+        this.largeDataset = dataset.data.details.data;
+        console.log(this.largeDataset);
         this.filterAndModifyData();
       },
       (error) => {
@@ -27,14 +28,14 @@ export class AppComponent {
   filterAndModifyData(): void {
     this.filteredDataset = this.largeDataset
       .filter(
-        (product: dataset) =>
+        (product: Dataset) =>
           product.type === 'Electronics' || product.type === 'Furniture'
       )
-      .map((product: dataset, index) => {
+      .map((product: Dataset, index) => {
         if (product.type === 'Electronics') {
-          return { ...product, name: `EProduct ${product.id + 1}`, id: index };
+          return { ...product, status: 'Active', id: `${index + 1}` };
         }
-        return { ...product, id: index };
+        return { ...product, id: `${index + 1}` };
       });
 
     console.log(this.filteredDataset);
