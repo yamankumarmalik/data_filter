@@ -1,0 +1,14 @@
+{
+  "headings": [
+    "Id",
+    "Status",
+    "Type",
+    "Place Id",
+    "Address",
+    "bandwidth",
+    "interfaceType",
+    "interfaceMode",
+    "typeOfService",
+    "status"
+  ]
+}

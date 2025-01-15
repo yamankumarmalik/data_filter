@@ -3,10 +3,9 @@ const fs = require("fs");
 const types = ["Electronics", "Furniture", "Stationary", "Sports"];
 const statuses = ["Active", "Inactive", "Pending"];
 const characteristics = [
-  { name: "speed", value: "1000" },
+  { name: "bandwidth", value: "1000 Mbps" },
   { name: "interfaceType", value: "1000 Base LX" },
   { name: "interfaceMode", value: "Auto Negotiation" },
-  { name: "bandwidth", value: "1GE" },
   { name: "typeOfService", value: "Head" },
   { name: "typeOfPOP", value: "UNI" },
   { name: "popName", value: "TAS ELIZABETH 1G" },

@@ -11,6 +11,9 @@ export class AppComponent {
   largeDataset: Dataset[] = [];
   filteredDataset: Dataset[] = [];
 
+  types: any[] = ['All', 'Electronics', 'Furniture'];
+  selectedValue: string = 'All';
+
   constructor(private httpClient: HttpClient) {}
   ngOnInit(): void {
     //filtering the dataset and changing the name of 1 product type
@@ -27,10 +30,15 @@ export class AppComponent {
   }
   filterAndModifyData(): void {
     this.filteredDataset = this.largeDataset
-      .filter(
-        (product: Dataset) =>
-          product.type === 'Electronics' || product.type === 'Furniture'
-      )
+      .filter((product: Dataset) => {
+        if (this.selectedValue === 'All') {
+          return product.type === 'Electronics' || product.type === 'Furniture';
+        } else if (this.selectedValue === 'Electronics') {
+          return product.type === 'Electronics';
+        } else {
+          return product.type === 'Furniture';
+        }
+      })
       .map((product: Dataset, index) => {
         if (product.type === 'Electronics') {
           return { ...product, status: 'Active', id: `${index + 1}` };

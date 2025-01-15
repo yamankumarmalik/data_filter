@@ -1,0 +1,54 @@
+<table class="table table-bordered" border="1">
+  <thead>
+    <tr>
+      <th scope="col" *ngFor="let heading of tableHeadings">
+        {{ heading | titlecase }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of displayedDataset">
+      <th scope="row">{{ data.id }}</th>
+      <td>{{ data.status }}</td>
+      <td>{{ data.type }}</td>
+      <td>
+        <tr *ngFor="let place of data.place">
+          <td>{{ place.id }}</td>
+        </tr>
+      </td>
+      <td>
+        <tr *ngFor="let place of data.place">
+          {{
+            place.address.name
+          }},
+          {{
+            place.address.streetNumber
+          }},
+          {{
+            place.address.streetType
+          }},
+          {{
+            place.address.locality
+          }},
+          {{
+            place.address.state
+          }},
+          {{
+            place.address.esaId
+          }}
+          <br /><strong>PostCode: </strong
+          >{{
+            place.address.postCode
+          }}
+        </tr>
+      </td>
+      <td
+        *ngFor="
+          let characteristic of filteredCharacteristics(data.characteristic)
+        "
+      >
+        {{ characteristic.value }}
+      </td>
+    </tr>
+  </tbody>
+</table>
